@@ -19,7 +19,6 @@ class RasporedRepositoryImpl(
             .doOnNext{
                 val entities = it.map { response ->
                     RasporedEntity(
-                        response.id,
                         response.predmet,
                         response.tip,
                         response.nastavnik,
