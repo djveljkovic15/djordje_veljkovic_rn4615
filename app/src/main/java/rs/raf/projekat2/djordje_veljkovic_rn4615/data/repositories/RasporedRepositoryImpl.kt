@@ -17,21 +17,39 @@ class RasporedRepositoryImpl(
     override fun fetchRaspored(): Observable<Resource<Unit>> {
         return rasporedService.findAll()
             .doOnNext{
-                val entities = it.map {
+                val entities = it.map { response ->
                     RasporedEntity(
-                        it.id,
-                        it.predmet,
-                        it.tip,
-                        it.nastavnik,
-                        it.grupe,
-                        it.dan,
-                        it.termin,
-                        it.ucionica
+                        response.id,
+                        response.predmet,
+                        response.tip,
+                        response.nastavnik,
+                        response.grupe,
+                        response.dan,
+                        response.termin,
+                        response.ucionica
                     )
                 }
                 rasporedDao.deleteAndInsertAll(entities)
             }.map {
                 Resource.Success(Unit)
+            }
+    }
+
+    override fun getRaspored(): Observable<List<Raspored>> {
+        return rasporedDao.findAll()
+            .map {
+                it.map { entity ->
+                    Raspored(
+                        entity.id,
+                        entity.predmet,
+                        entity.tip,
+                        entity.nastavnik,
+                        entity.grupe,
+                        entity.dan,
+                        entity.termin,
+                        entity.ucionica
+                    )
+                }
             }
     }
 }

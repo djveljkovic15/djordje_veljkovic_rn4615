@@ -14,6 +14,6 @@ class RasporedFragment : Fragment(R.layout.fragment_raspored) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rasporedViewModel.getRaspored()
+        rasporedViewModel.fetchRaspored()
     }
 }

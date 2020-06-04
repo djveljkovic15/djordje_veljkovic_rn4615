@@ -2,6 +2,7 @@ package rs.raf.projekat2.djordje_veljkovic_rn4615.data.datasources.local
 
 import androidx.room.*
 import io.reactivex.Completable
+import io.reactivex.Observable
 import rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.RasporedEntity
 
 @Dao
@@ -15,6 +16,9 @@ abstract class RasporedDao {
 
     @Query("DELETE FROM raspored")
     abstract fun  deleteAll()
+
+    @Query("SELECT * FROM raspored")
+    abstract fun findAll(): Observable<List<RasporedEntity>>
 
     @Transaction
     open fun deleteAndInsertAll(entities: List<RasporedEntity>) {

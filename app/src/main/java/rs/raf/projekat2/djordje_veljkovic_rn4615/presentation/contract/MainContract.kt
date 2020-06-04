@@ -9,6 +9,8 @@ interface MainContract {
 
         val rasporedState: LiveData<RasporedState>
 
+        fun fetchRaspored()
+
         fun getRaspored()
 
     }

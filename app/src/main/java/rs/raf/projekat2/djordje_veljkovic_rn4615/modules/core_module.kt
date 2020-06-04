@@ -25,9 +25,11 @@ val coreModule = module {
         androidApplication().getSharedPreferences(androidApplication().packageName, Context.MODE_PRIVATE)
     }
 
-    single { Room.databaseBuilder(androidContext(), RasporedDataBase::class.java, "RasporedDB")
-        .fallbackToDestructiveMigration()
-        .build() }
+    single {
+        Room.databaseBuilder(androidContext(), RasporedDataBase::class.java, "RasporedDB")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
 
     single { createRetrofit(moshi = get(), httpClient = get()) }
 

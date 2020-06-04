@@ -19,7 +19,7 @@ class RasporedViewModel(
 
     override val rasporedState: MutableLiveData<RasporedState> = MutableLiveData()
 
-    override fun getRaspored() {
+    override fun fetchRaspored() {
         val errorMessage = "Error while fetching raspored from server!"
 
         val subscription = rasporedRepository
@@ -37,6 +37,23 @@ class RasporedViewModel(
                 },
                 {
                     rasporedState.value = RasporedState.Error(errorMessage)
+                    Timber.e(it)
+                }
+            )
+
+        subscriptions.add(subscription)
+    }
+
+    override fun getRaspored() {
+        val subscription = rasporedRepository
+            .getRaspored()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    rasporedState.value = RasporedState.Success(it)
+                }, {
+                    rasporedState.value = RasporedState.Error("Error while gettign data from database!")
                     Timber.e(it)
                 }
             )
