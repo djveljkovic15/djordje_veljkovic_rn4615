@@ -9,12 +9,10 @@ import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.viewPager.Bot
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    companion object { // Da li stvarno hocu da drzim ovde?
+    companion object {
         const val USERNAME = "username"
         const val PIN = "pin"
-
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +25,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         initNavigation()
 
     }
-
 
     private fun initNavigation() {
         bottomNavigation.setOnNavigationItemSelectedListener {
@@ -52,7 +49,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun initViewPager() {
-       // viewPager.adapter = BottomPagerAdapter(supportFragmentManager)
         viewPager.adapter = BottomPagerAdapter(supportFragmentManager)
     }
 
