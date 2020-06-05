@@ -1,6 +1,6 @@
 package rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.states
 
-import rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.Raspored
+import rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.raspored.Raspored
 
 sealed class RasporedState {
 

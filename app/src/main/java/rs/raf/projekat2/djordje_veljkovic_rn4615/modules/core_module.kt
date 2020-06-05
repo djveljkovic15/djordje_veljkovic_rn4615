@@ -15,7 +15,8 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import rs.raf.projekat2.djordje_veljkovic_rn4615.BuildConfig
-import rs.raf.projekat2.djordje_veljkovic_rn4615.data.datasources.local.RasporedDataBase
+import rs.raf.projekat2.djordje_veljkovic_rn4615.data.datasources.local.raspored.RasporedDataBase
+import rs.raf.projekat2.djordje_veljkovic_rn4615.data.datasources.local.user.UserDataBase
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -27,6 +28,12 @@ val coreModule = module {
 
     single {
         Room.databaseBuilder(androidContext(), RasporedDataBase::class.java, "RasporedDB")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+    // User databaza
+    single {
+        Room.databaseBuilder(androidContext(), UserDataBase::class.java, "UserDB")
             .fallbackToDestructiveMigration()
             .build()
     }

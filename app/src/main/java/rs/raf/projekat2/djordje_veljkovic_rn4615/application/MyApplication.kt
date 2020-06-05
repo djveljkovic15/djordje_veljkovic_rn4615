@@ -10,6 +10,7 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import rs.raf.projekat2.djordje_veljkovic_rn4615.modules.coreModule
 import rs.raf.projekat2.djordje_veljkovic_rn4615.modules.rasporedModule
+import rs.raf.projekat2.djordje_veljkovic_rn4615.modules.userModule
 import timber.log.Timber
 
 class MyApplication : Application() {
@@ -22,7 +23,7 @@ class MyApplication : Application() {
     private fun init() {
         initTimber()
         initKoin()
-        //initStetho()
+        initStetho()
     }
 
     private fun initTimber() {
@@ -30,7 +31,7 @@ class MyApplication : Application() {
     }
 
     private fun initKoin() {
-        val modules = listOf(coreModule, rasporedModule)
+        val modules = listOf(coreModule, rasporedModule, userModule)
 
         startKoin {
             androidLogger(Level.DEBUG)

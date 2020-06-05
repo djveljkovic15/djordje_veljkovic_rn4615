@@ -1,4 +1,4 @@
-package rs.raf.projekat2.djordje_veljkovic_rn4615.data.models
+package rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.raspored
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

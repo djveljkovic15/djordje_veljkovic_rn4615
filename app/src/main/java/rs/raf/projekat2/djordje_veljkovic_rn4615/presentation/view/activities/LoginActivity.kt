@@ -10,6 +10,7 @@ import rs.raf.projekat2.djordje_veljkovic_rn4615.R
 
 class LoginActivity: AppCompatActivity(R.layout.activity_login) {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -67,4 +68,5 @@ class LoginActivity: AppCompatActivity(R.layout.activity_login) {
 */
         }
     }
+
 }
