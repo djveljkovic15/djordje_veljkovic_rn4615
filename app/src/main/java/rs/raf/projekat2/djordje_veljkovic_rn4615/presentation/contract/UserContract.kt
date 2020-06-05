@@ -11,6 +11,7 @@ interface UserContract {
     interface ViewModel {
 
         val addDone: LiveData<AddUserState>
+        val logged: LiveData<UserState>
         val userState: LiveData<UserState>
         fun verifyUser(username:String, pin:String)
         fun addUser(user: User)

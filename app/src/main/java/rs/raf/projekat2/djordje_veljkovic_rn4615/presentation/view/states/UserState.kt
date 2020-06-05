@@ -4,6 +4,8 @@ import rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.user.User
 
 sealed class UserState {
 
+    object Logged: UserState()
+
     object Loading: UserState()
 
     object DataFetched: UserState()
