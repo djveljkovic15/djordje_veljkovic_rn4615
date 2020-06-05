@@ -1,4 +1,4 @@
-package rs.raf.projekat2.djordje_veljkovic_rn4615.data.datasources.local.raspored
+package rs.raf.projekat2.djordje_veljkovic_rn4615.data.datasources.local
 
 import androidx.room.*
 import io.reactivex.Completable

@@ -1,7 +1,7 @@
 package rs.raf.projekat2.djordje_veljkovic_rn4615.data.repositories.raspored
 
 import io.reactivex.Observable
-import rs.raf.projekat2.djordje_veljkovic_rn4615.data.datasources.local.raspored.RasporedDao
+import rs.raf.projekat2.djordje_veljkovic_rn4615.data.datasources.local.RasporedDao
 import rs.raf.projekat2.djordje_veljkovic_rn4615.data.datasources.remote.RasporedService
 import rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.Resource
 import rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.raspored.Raspored

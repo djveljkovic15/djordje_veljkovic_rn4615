@@ -22,7 +22,6 @@ class RasporedViewModel(
 
     override val rasporedState: MutableLiveData<RasporedState> = MutableLiveData()
 
-
     private val publishSubject: PublishSubject<RasporedFilter> = PublishSubject.create()
 
     init{
@@ -51,8 +50,10 @@ class RasporedViewModel(
                     Timber.e(it)
                 }
             )
+
         subscriptions.add(subscription)
     }
+
     override fun fetchRaspored() {
         val errorMessage = "Error while fetching raspored from server!"
 
@@ -95,7 +96,6 @@ class RasporedViewModel(
         subscriptions.add(subscription)
     }
 
-
     override fun filterRaspored(filter: String, grupa: String, dan: String){
         Timber.e("RVM filter raspored")
         publishSubject.onNext(
@@ -106,7 +106,6 @@ class RasporedViewModel(
             )
         )
     }
-
 
     override fun onCleared() {
         super.onCleared()
