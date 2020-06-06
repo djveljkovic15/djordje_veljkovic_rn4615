@@ -116,8 +116,8 @@ class LoginActivity: AppCompatActivity(R.layout.activity_login) {
                         }
                     }
                     val intent = Intent(this, LoginActivity::class.java)
-                    finish()
                     startActivity(intent)
+                    finish()
                     //Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 }
 

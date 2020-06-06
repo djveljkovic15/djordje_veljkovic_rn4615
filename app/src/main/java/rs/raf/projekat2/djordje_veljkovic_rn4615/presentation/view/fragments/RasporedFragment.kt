@@ -66,7 +66,6 @@ class RasporedFragment : Fragment(R.layout.fragment_raspored) {
         rasporedViewModel.rasporedState.observe(viewLifecycleOwner, Observer {
             Timber.e("REEE %s", it.toString())
             renderState(it)
-
         })
 
         rasporedViewModel.fetchRaspored() // ako stavim pre, nemam problem?

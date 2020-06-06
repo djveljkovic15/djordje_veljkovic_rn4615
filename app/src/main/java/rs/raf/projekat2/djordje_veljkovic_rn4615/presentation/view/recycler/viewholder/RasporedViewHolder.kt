@@ -9,13 +9,13 @@ import rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.raspored.Raspored
 class RasporedViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     fun bind(raspored: Raspored) {
-        recyclerOtpusteniPredmetTv.text = raspored.predmet
-        recyclerOtpusteniNastavnikTv.text = raspored.nastavnik
-        recyclerOtpusteniTipTv.text = raspored.tip
-        recyclerOtpusteniTerminTv.text = raspored.termin
-        recyclerOtpusteniUcionicaTv.text = raspored.ucionica
-        recyclerOtpusteniGrupeTv.text = raspored.grupe
-        recyclerOtpusteniDanTv.text = raspored.dan
+        recyclerRasporedPredmetTv.text = raspored.predmet
+        recyclerRasporedNastavnikTv.text = raspored.nastavnik
+        recyclerRasporedTipTv.text = raspored.tip
+        recyclerRasporedTerminTv.text = raspored.termin
+        recyclerRasporedUcionicaTv.text = raspored.ucionica
+        recyclerRasporedGrupeTv.text = raspored.grupe
+        recyclerRasporedDanTv.text = raspored.dan
 
 
     }

@@ -11,14 +11,14 @@ class NoteRepositoryImpl(
 ) : NoteRepository {
 
     override fun save(note: Note): Completable {
-        val noteEntity = NoteEntity(note.userCreatorUsername, note.content, note.archived)
+        val noteEntity = NoteEntity(note.userCreatorUsername,note.title, note.content, note.archived)
         return noteDao.save(noteEntity)
     }
 
     override fun findById(id: Long): Single<Note> {
         return noteDao.findById(id)
             .map {
-                Note(it.id, it.noteOwner, it.content, it.archived)
+                Note(it.id, it.noteOwner, it.title, it.content, it.archived)
             }
     }
 }

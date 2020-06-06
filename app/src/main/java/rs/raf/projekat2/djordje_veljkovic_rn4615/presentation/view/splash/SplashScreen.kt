@@ -85,8 +85,9 @@ public class SplashScreen : AppCompatActivity(){
                 Timber.e("Error iz splash screen")
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
-                finish()
+
                 Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                finish()
             }
             else ->{
                 Timber.e("Error iz splash screen DEFAULT VERZIJA")

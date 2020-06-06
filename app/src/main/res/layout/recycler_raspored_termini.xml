@@ -17,7 +17,7 @@
         >
 
         <TextView
-            android:id="@+id/recyclerOtpusteniPredmetTv"
+            android:id="@+id/recyclerRasporedPredmetTv"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,61 +26,61 @@
 
             />
         <TextView
-            android:id="@+id/recyclerOtpusteniTipTv"
+            android:id="@+id/recyclerRasporedTipTv"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recyclerOtpusteniPredmetTv"
+            app:layout_constraintTop_toBottomOf="@id/recyclerRasporedPredmetTv"
 
             android:layout_marginLeft="25dp"
 
             />
 
         <TextView
-            android:id="@+id/recyclerOtpusteniNastavnikTv"
+            android:id="@+id/recyclerRasporedNastavnikTv"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recyclerOtpusteniTipTv"
+            app:layout_constraintTop_toBottomOf="@id/recyclerRasporedTipTv"
             android:layout_marginLeft="25dp"
 
             />
 
         <TextView
-            android:id="@+id/recyclerOtpusteniUcionicaTv"
+            android:id="@+id/recyclerRasporedUcionicaTv"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recyclerOtpusteniNastavnikTv"
+            app:layout_constraintTop_toBottomOf="@id/recyclerRasporedNastavnikTv"
             android:layout_marginLeft="25dp"
 
             />
         <TextView
-            android:id="@+id/recyclerOtpusteniGrupeTv"
+            android:id="@+id/recyclerRasporedGrupeTv"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recyclerOtpusteniUcionicaTv"
+            app:layout_constraintTop_toBottomOf="@id/recyclerRasporedUcionicaTv"
             android:layout_marginLeft="25dp"
 
             />
         <TextView
-            android:id="@+id/recyclerOtpusteniDanTv"
+            android:id="@+id/recyclerRasporedDanTv"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/recyclerOtpusteniGrupeTv"
+            app:layout_constraintStart_toEndOf="@id/recyclerRasporedGrupeTv"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/recyclerOtpusteniUcionicaTv"
+            app:layout_constraintTop_toTopOf="@id/recyclerRasporedUcionicaTv"
             android:layout_marginLeft="55dp"
 
             />
         <TextView
-            android:id="@+id/recyclerOtpusteniTerminTv"
+            android:id="@+id/recyclerRasporedTerminTv"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/recyclerOtpusteniGrupeTv"
+            app:layout_constraintStart_toEndOf="@id/recyclerRasporedGrupeTv"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recyclerOtpusteniDanTv"
+            app:layout_constraintTop_toBottomOf="@id/recyclerRasporedDanTv"
             android:layout_marginLeft="35dp"
 
             />

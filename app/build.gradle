@@ -115,5 +115,8 @@ dependencies {
     implementation 'com.facebook.stetho:stetho-okhttp:1.5.1'
     implementation 'com.facebook.stetho:stetho-urlconnection:1.5.1'
 
+    //PulsingButton
+    implementation 'com.github.markushi:circlebutton:1.1'
+
 }
 

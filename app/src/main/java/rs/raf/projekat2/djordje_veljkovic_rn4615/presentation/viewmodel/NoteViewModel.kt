@@ -9,8 +9,8 @@ import rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.note.Note
 import rs.raf.projekat2.djordje_veljkovic_rn4615.data.repositories.note.NoteRepository
 import rs.raf.projekat2.djordje_veljkovic_rn4615.data.repositories.user.UserRepository
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.contract.NoteContract
-import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.states.SaveNoteState
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.states.FindNoteState
+import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.states.SaveNoteState
 
 class NoteViewModel(
     private val noteRepository: NoteRepository,
@@ -22,6 +22,8 @@ class NoteViewModel(
     override val saveNoteState: MutableLiveData<SaveNoteState> = MutableLiveData()
 
     override val findNoteState: MutableLiveData<FindNoteState> = MutableLiveData()
+
+
 
     override fun save(note: Note) {
         val subscription = noteRepository.save(note)
