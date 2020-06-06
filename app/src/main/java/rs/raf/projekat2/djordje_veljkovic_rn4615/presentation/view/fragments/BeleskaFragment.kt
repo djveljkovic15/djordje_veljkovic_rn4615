@@ -2,14 +2,14 @@ package rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_beleska.*
-import kotlinx.android.synthetic.main.fragment_raspored.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import rs.raf.projekat2.djordje_veljkovic_rn4615.R
+import rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.note.Note
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.contract.NoteContract
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.recycler.adapter.BeleskaAdapter
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.recycler.diff.BeleskaDiffCallback
@@ -30,9 +30,19 @@ class BeleskaFragment : Fragment(R.layout.fragment_beleska){
     private fun init() {
 //        noteViewModel.findById(1)
 
+        initAddTestNotes()
         initRecycleView()
         initObservers()
 
+    }
+
+    private fun initAddTestNotes() {
+        val note1 = Note(1,"Dzo","Title 1", "Ovo je neki content... :) ", false)
+        val note2 = Note(2,"Dzo","Title 2", "Ovo je neki content... :) ", false)
+        val note3 = Note(3,"Dzo","Title 3", "Ovo je neki content... :) ", false)
+        noteViewModel.save(note1)
+        noteViewModel.save(note2)
+        noteViewModel.save(note3)
     }
 
     private fun initObservers() {
@@ -40,39 +50,45 @@ class BeleskaFragment : Fragment(R.layout.fragment_beleska){
             Timber.e("beleskaaaaaaaaaaaaa moooliiitvaaaa")
             renderState(it)
         })
-//        noteViewModel.getNotes()
+        noteViewModel.getAll()
     }
 
     private fun renderState(noteState: NoteState) {
-//        when (noteState) {
-//            is FindNoteState.Success -> {
+        when (noteState) {
+            is NoteState.AllSuccess -> {
 //                showLoadingState(false)
-//                rasporedAdapter.submitList(state.raspored)
-//            }
-//            is FindNoteState.Error -> {
+                noteAdapter.submitList(noteState.notes)
+            }
+            is NoteState.Error -> {
 //                showLoadingState(false)
-//                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
-//            }
-//            is FindNoteState.DataFetched -> {
-//                showLoadingState(false)
-//                Toast.makeText(context, "Fresh data fetched from the server", Toast.LENGTH_LONG).show()
-//            }
-//            is FindNoteState.Loading -> {
+                Toast.makeText(context, noteState.message, Toast.LENGTH_SHORT).show()
+            }
+//            is NoteState.Loading -> {
 //                showLoadingState(true)
 //            }
-//        }
+        }
     }
 
     private fun initRecycleView() {
         fragmentBeleskeRW.layoutManager = LinearLayoutManager(activity)
-        noteAdapter = BeleskaAdapter(BeleskaDiffCallback())
+        noteAdapter = BeleskaAdapter(BeleskaDiffCallback(),
+            {
+//                noteViewModel.deleteNote(it.id)
+
+            },{
+                //otvara novi prozor koji povlaci podatke\menja u bazi
+                //noteViewModel.save(it)
+            },{ // Da li ovde mogu ovako ili da mu bacam da radi to u repou?
+                var updatedNote = Note(it.id,it.userCreatorUsername,it.title,it.content,!it.archived)
+                noteViewModel.save(updatedNote)
+            })
         fragmentBeleskeRW.adapter = noteAdapter
 
     }
-
-    private fun showLoadingState(loading: Boolean) {
-        fragmentRasporedFilterEt.isVisible = !loading
-        fragmentRasporedRW.isVisible = !loading
-        loadingPb.isVisible = loading
-    }
+//
+//    private fun showLoadingState(loading: Boolean) {
+//        fragmentRasporedFilterEt.isVisible = !loading
+//        fragmentRasporedRW.isVisible = !loading
+//        loadingPb.isVisible = loading
+//    }
 }

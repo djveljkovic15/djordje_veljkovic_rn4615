@@ -41,7 +41,8 @@ class LoginActivity: AppCompatActivity(R.layout.activity_login) {
         loginBtn.setOnClickListener(){
             username = usernameEt.text.toString()
             pin = pinEt.text.toString()
-
+            Timber.e("WHAT?")
+            Timber.e("ovo: "+username + pin)
             userViewModel.verifyUser(username, pin)
 
 //            userViewModel.logged.observe(this, Observer {

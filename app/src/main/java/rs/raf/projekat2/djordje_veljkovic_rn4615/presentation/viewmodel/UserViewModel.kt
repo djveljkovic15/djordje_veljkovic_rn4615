@@ -35,6 +35,8 @@ class UserViewModel(
                     logged.value = UserState.Logged
                 },
                 {
+
+                    Timber.e("porukica iz UVM kad je error")
                     logged.value = UserState.Error("Error happened while checking user")
                 }
             )

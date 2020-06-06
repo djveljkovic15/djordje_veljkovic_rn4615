@@ -18,5 +18,5 @@ package rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.user
 ////        entity = NoteEntity::class,
 ////        projection = ["noteOwner"]
 ////    )
-//     val kurac: List<NoteEntity>?
+//     val notes: List<NoteEntity>?
 //)

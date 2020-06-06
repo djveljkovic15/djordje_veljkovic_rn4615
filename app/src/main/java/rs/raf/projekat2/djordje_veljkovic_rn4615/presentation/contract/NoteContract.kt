@@ -19,6 +19,8 @@ interface NoteContract {
 
         fun filterNote(title: String, content: String, archived: Boolean)
 
+        fun getAll()
+
     }
 
 }

@@ -23,6 +23,11 @@ class RasporedFragment : Fragment(R.layout.fragment_raspored) {
     private val rasporedViewModel: RasporedContract.ViewModel by sharedViewModel<RasporedViewModel>()
     lateinit var rasporedAdapter : RasporedAdapter
 
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        initFetchData()
+//    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
@@ -62,18 +67,24 @@ class RasporedFragment : Fragment(R.layout.fragment_raspored) {
 
     }
 
+
     private fun initObservers() {
         rasporedViewModel.rasporedState.observe(viewLifecycleOwner, Observer {
             Timber.e("REEE %s", it.toString())
             renderState(it)
         })
 
-        rasporedViewModel.fetchRaspored() // ako stavim pre, nemam problem?
+        rasporedViewModel.fetchRaspored() // kako da ga pozovem samo jednom? :)
         rasporedViewModel.getRaspored()
         // Zasto drzim fetchRaspored ovde?
 //        rasporedViewModel.fetchRaspored()
 
     }
+
+    private fun initFetchData() {
+        rasporedViewModel.fetchRaspored()
+    }
+
 
     private fun initRecyclerView() {
         fragmentRasporedRW.layoutManager = LinearLayoutManager(activity)

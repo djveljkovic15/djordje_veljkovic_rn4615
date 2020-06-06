@@ -32,7 +32,7 @@ public class SplashScreen : AppCompatActivity(){
 //        initSharedPref()
     }
     private fun initNewUser() {
-        val username = "Dzo"
+        val username = "user"
         val pin = "1234"
         val newUser = User(username, pin)
         userViewModel.addUser(newUser)
@@ -85,7 +85,6 @@ public class SplashScreen : AppCompatActivity(){
                 Timber.e("Error iz splash screen")
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
-
                 Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 finish()
             }

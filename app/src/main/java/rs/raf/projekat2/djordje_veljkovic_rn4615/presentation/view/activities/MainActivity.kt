@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun initViewPager() {
         viewPager.adapter = BottomPagerAdapter(supportFragmentManager)
+        viewPager.offscreenPageLimit = 3
     }
 
 }
