@@ -23,7 +23,7 @@ interface NoteContract {
 
         fun findById(id: Long)
 
-        fun filterNote(title: String, content: String, archived: Boolean)
+        fun filterNote(filter: String, archived: Boolean)
 
         fun getAll()
 

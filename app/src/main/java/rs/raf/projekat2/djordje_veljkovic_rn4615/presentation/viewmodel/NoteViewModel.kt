@@ -39,7 +39,7 @@ class NoteViewModel(
             .distinctUntilChanged()
             .switchMap {
                 noteRepository
-                    .filterNotes(it.title, it.content, it.archived)
+                    .filterNotes(it.filter, it.archived)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnError {
@@ -116,8 +116,8 @@ class NoteViewModel(
         subscriptions.add(subscription)
     }
 
-    override fun filterNote(title: String, content: String, archived: Boolean) {
-        publishSubject.onNext(NoteFilter(title, content, archived))
+    override fun filterNote(filter: String, archived: Boolean) {
+        publishSubject.onNext(NoteFilter(filter, archived))
     }
 
     override fun deleteById(id: Long) {

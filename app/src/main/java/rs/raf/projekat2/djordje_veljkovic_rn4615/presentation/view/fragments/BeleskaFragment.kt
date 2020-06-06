@@ -2,7 +2,9 @@ package rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.widget.CompoundButton
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +19,7 @@ import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.states.NoteSt
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.viewmodel.NoteViewModel
 import timber.log.Timber
 
-class BeleskaFragment : Fragment(R.layout.fragment_beleska){
+class BeleskaFragment : Fragment(R.layout.fragment_beleska), CompoundButton.OnCheckedChangeListener{
 
     private val noteViewModel: NoteContract.ViewModel by sharedViewModel<NoteViewModel>()
     lateinit var noteAdapter: BeleskaAdapter
@@ -30,6 +32,7 @@ class BeleskaFragment : Fragment(R.layout.fragment_beleska){
     private fun init() {
 //        noteViewModel.findById(1)
 
+        initFilter()
         initAddTestNotes()
         initRecycleView()
         initObservers()
@@ -37,20 +40,52 @@ class BeleskaFragment : Fragment(R.layout.fragment_beleska){
     }
 
     private fun initAddTestNotes() {
-        val note1 = Note(1,"Dzo","Title 1", "Ovo je neki content... :) ", false)
-        val note2 = Note(2,"Dzo","Title 2", "Ovo je neki content... :) ", false)
-        val note3 = Note(3,"Dzo","Title 3", "Ovo je neki content... :) ", false)
-        noteViewModel.save(note1)
-        noteViewModel.save(note2)
-        noteViewModel.save(note3)
+//        val note1 = Note(1,"Dzo","Title 1", "Ovo je neki content... :) ", false)
+//        val note2 = Note(2,"Dzo","Title 2", "Ovo je neki content... :) ", false)
+//        val note3 = Note(3,"Dzo","Title 3", "Ovo je neki content... :) ", false)
+//        noteViewModel.save(note1)
+//        noteViewModel.save(note2)
+        noteViewModel.saveTestNotes()
     }
 
+    override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+        when(buttonView?.id){
+            R.id.fragmentBeleskeSw -> {
+
+                fragmentBeleskeSw.setOnCheckedChangeListener(this)
+
+                noteViewModel.filterNote(fragmentBeleskeFilterEt.text.toString(), isChecked)
+            }else->{
+                Timber.e("456")
+
+            }
+        }
+    }
+
+    private fun initFilter() {
+
+        fragmentBeleskeSw.setOnCheckedChangeListener(this)
+
+        var filter = ""
+        var archive : Boolean
+
+        fragmentBeleskeFilterEt.doAfterTextChanged {
+            filter = fragmentBeleskeFilterEt.text.toString()
+            archive = false
+
+            noteViewModel.filterNote(filter, archive)
+        }
+
+    }
     private fun initObservers() {
         noteViewModel.noteState.observe(viewLifecycleOwner, Observer {
             Timber.e("beleskaaaaaaaaaaaaa moooliiitvaaaa")
             renderState(it)
         })
         noteViewModel.getAll()
+
+
+
     }
 
     private fun renderState(noteState: NoteState) {
@@ -73,18 +108,19 @@ class BeleskaFragment : Fragment(R.layout.fragment_beleska){
         fragmentBeleskeRW.layoutManager = LinearLayoutManager(activity)
         noteAdapter = BeleskaAdapter(BeleskaDiffCallback(),
             {
-//                noteViewModel.deleteNote(it.id)
+                noteViewModel.deleteById(it.id)
 
             },{
                 //otvara novi prozor koji povlaci podatke\menja u bazi
                 //noteViewModel.save(it)
-            },{ // Da li ovde mogu ovako ili da mu bacam da radi to u repou?
-                var updatedNote = Note(it.id,it.userCreatorUsername,it.title,it.content,!it.archived)
-                noteViewModel.save(updatedNote)
+            },{ // Mogli smo da napravimo samo setArchived kao poziv ka bazi
+                val updatedNote = Note(it.id,it.userCreatorUsername,it.title,it.content,!it.archived)
+                noteViewModel.update(it.id, updatedNote)
             })
         fragmentBeleskeRW.adapter = noteAdapter
 
     }
+
 //
 //    private fun showLoadingState(loading: Boolean) {
 //        fragmentRasporedFilterEt.isVisible = !loading

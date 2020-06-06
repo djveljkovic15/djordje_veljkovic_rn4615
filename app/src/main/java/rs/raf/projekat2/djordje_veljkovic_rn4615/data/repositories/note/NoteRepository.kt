@@ -17,7 +17,8 @@ interface NoteRepository {
 
     fun findAllNotArchived(): Observable<List<Note>>
 
-    fun filterNotes(title: String, content: String, archived: Boolean): Observable<List<Note>>
+    fun filterNotes(filter: String, archived: Boolean): Observable<List<Note>>
+//    fun filterNotes(title: String, content: String, archived: Boolean): Observable<List<Note>>
 
     fun deleteById(id: Long): Completable
 

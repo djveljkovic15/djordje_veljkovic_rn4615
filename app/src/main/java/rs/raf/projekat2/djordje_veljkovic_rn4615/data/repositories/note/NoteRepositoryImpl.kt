@@ -68,8 +68,8 @@ class NoteRepositoryImpl(
             }
     }
 
-    override fun filterNotes(title: String, content: String, archived: Boolean): Observable<List<Note>> {
-        return noteDao.filterNotes(title, content, archived)
+    override fun filterNotes(filter: String, archived: Boolean): Observable<List<Note>> {
+        return noteDao.filterNotes(filter, archived)
             .map {
                 it.map {entity ->
                     Note(
@@ -92,9 +92,9 @@ class NoteRepositoryImpl(
     }
 
     override fun saveTestNotes(): Completable {
-        val note1 = NoteEntity("Dzo","Title 1", "Ovo je neki content... :) ", false)
-        val note2 = NoteEntity("Dzo","Title 2", "Ovo je neki content... :) ", false)
-        val note3 = NoteEntity("Dzo","Title 3", "Ovo je neki content... :) ", false)
+        val note1 = NoteEntity("Dzo","Title 1", "Ovo je neki content iz title1 gospodina... :) ", false)
+        val note2 = NoteEntity("Dzo","Title 2", "Ovo je neki content iz title2 smaraca... :) ", false)
+        val note3 = NoteEntity("Dzo","Title 3", "Ovo je neki content iz title3 ludaka... :) ", false)
 
         return noteDao.saveAll(listOf(note1, note2, note3))
     }
