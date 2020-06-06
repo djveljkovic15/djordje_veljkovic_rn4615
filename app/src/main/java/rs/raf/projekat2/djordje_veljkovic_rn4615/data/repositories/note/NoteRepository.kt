@@ -11,4 +11,12 @@ interface NoteRepository {
 
     fun findById(id: Long): Single<Note>
 
+    fun findAll(): Observable<List<Note>>
+
+    fun findAllArchived(): Observable<List<Note>>
+
+    fun findAllNotArchived(): Observable<List<Note>>
+
+    fun filterNotes(title: String, content: String, archived: Boolean): Observable<List<Note>>
+
 }

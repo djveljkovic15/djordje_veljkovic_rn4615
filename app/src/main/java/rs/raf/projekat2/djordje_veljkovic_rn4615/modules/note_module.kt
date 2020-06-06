@@ -20,7 +20,7 @@ val noteModule = module{
     }
 
     viewModel {
-        NoteViewModel(noteRepository = get(), userRepository = get())
+        NoteViewModel(noteRepository = get())
     }
 
 }

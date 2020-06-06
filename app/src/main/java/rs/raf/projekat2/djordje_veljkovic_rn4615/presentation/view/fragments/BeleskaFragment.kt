@@ -13,7 +13,7 @@ import rs.raf.projekat2.djordje_veljkovic_rn4615.R
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.contract.NoteContract
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.recycler.adapter.BeleskaAdapter
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.recycler.diff.BeleskaDiffCallback
-import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.states.FindNoteState
+import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.states.NoteState
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.viewmodel.NoteViewModel
 import timber.log.Timber
 
@@ -36,14 +36,14 @@ class BeleskaFragment : Fragment(R.layout.fragment_beleska){
     }
 
     private fun initObservers() {
-        noteViewModel.findNoteState.observe(viewLifecycleOwner, Observer {
+        noteViewModel.noteState.observe(viewLifecycleOwner, Observer {
             Timber.e("beleskaaaaaaaaaaaaa moooliiitvaaaa")
             renderState(it)
         })
 //        noteViewModel.getNotes()
     }
 
-    private fun renderState(noteState: FindNoteState) {
+    private fun renderState(noteState: NoteState) {
 //        when (noteState) {
 //            is FindNoteState.Success -> {
 //                showLoadingState(false)

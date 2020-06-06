@@ -24,8 +24,6 @@ class UserViewModel(
 
     override val logged: MutableLiveData<UserState> = MutableLiveData()
 
-
-
     override fun verifyUser(username: String, pin: String){
         val subscription = userRepository
             .verifyUser(username, pin)
