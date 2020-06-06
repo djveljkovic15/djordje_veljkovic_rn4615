@@ -82,4 +82,20 @@ class NoteRepositoryImpl(
                 }
             }
     }
+
+    override fun deleteById(id: Long): Completable {
+        return noteDao.deleteById(id)
+    }
+
+    override fun update(existingId: Long, note: Note): Completable {
+        return noteDao.update(existingId, note.title, note.content, note.archived)
+    }
+
+    override fun saveTestNotes(): Completable {
+        val note1 = NoteEntity("Dzo","Title 1", "Ovo je neki content... :) ", false)
+        val note2 = NoteEntity("Dzo","Title 2", "Ovo je neki content... :) ", false)
+        val note3 = NoteEntity("Dzo","Title 3", "Ovo je neki content... :) ", false)
+
+        return noteDao.saveAll(listOf(note1, note2, note3))
+    }
 }

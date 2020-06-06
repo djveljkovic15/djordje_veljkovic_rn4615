@@ -19,4 +19,10 @@ interface NoteRepository {
 
     fun filterNotes(title: String, content: String, archived: Boolean): Observable<List<Note>>
 
+    fun deleteById(id: Long): Completable
+
+    fun update(existingId: Long, note: Note): Completable
+
+    fun saveTestNotes(): Completable
+
 }

@@ -11,7 +11,9 @@ import rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.note.NoteFilter
 import rs.raf.projekat2.djordje_veljkovic_rn4615.data.repositories.note.NoteRepository
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.contract.NoteContract
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.states.AddNoteState
+import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.states.DeleteNoteState
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.states.NoteState
+import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.states.UpdateNoteState
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
@@ -24,6 +26,10 @@ class NoteViewModel(
     private val publishSubject: PublishSubject<NoteFilter> = PublishSubject.create()
 
     override val addNoteState: MutableLiveData<AddNoteState> = MutableLiveData()
+
+    override val deleteNoteState: MutableLiveData<DeleteNoteState> = MutableLiveData()
+
+    override val updateNoteState: MutableLiveData<UpdateNoteState> = MutableLiveData()
 
     override val noteState: MutableLiveData<NoteState> = MutableLiveData()
 
@@ -69,6 +75,7 @@ class NoteViewModel(
                 {
                     Timber.e(" iz save NVM errorr")
                     addNoteState.value = AddNoteState.Error("Error while saving note: $note!")
+                    Timber.e(it)
                 }
             )
 
@@ -102,6 +109,7 @@ class NoteViewModel(
                 },
                 {
                     noteState.value = NoteState.Error("Error while finding note with id: $id!")
+                    Timber.e(it)
                 }
             )
 
@@ -110,6 +118,58 @@ class NoteViewModel(
 
     override fun filterNote(title: String, content: String, archived: Boolean) {
         publishSubject.onNext(NoteFilter(title, content, archived))
+    }
+
+    override fun deleteById(id: Long) {
+        val subscription = noteRepository.deleteById(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    deleteNoteState.value = DeleteNoteState.Success
+                },
+                {
+                    deleteNoteState.value = DeleteNoteState.Error("Error while deleting note with id: $id!")
+                    Timber.e(it)
+                }
+            )
+
+        subscriptions.add(subscription)
+    }
+
+    override fun update(existingId: Long, note: Note) {
+        val subscription = noteRepository.update(existingId, note)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    updateNoteState.value = UpdateNoteState.Success
+                },
+                {
+                    updateNoteState.value = UpdateNoteState.Error("Error while updating note with id: $existingId!")
+                    Timber.e(it)
+                }
+            )
+
+        subscriptions.add(subscription)
+    }
+
+    override fun saveTestNotes() {
+        val subscription = noteRepository
+            .saveTestNotes()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    addNoteState.value = AddNoteState.Success
+                },
+                {
+                    addNoteState.value = AddNoteState.Error("Error while saving test notes!")
+                    Timber.e(it)
+                }
+            )
+
+        subscriptions.add(subscription)
     }
 
     override fun onCleared() {

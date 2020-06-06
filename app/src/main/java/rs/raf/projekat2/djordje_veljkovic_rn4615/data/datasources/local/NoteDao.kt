@@ -16,6 +16,9 @@ abstract class NoteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun save(entity: NoteEntity): Completable
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun saveAll(entities: List<NoteEntity>): Completable
+
     @Query("SELECT * FROM notes WHERE id == :id")
     abstract fun findById(id: Long): Single<NoteEntity>
 
@@ -30,5 +33,11 @@ abstract class NoteDao {
 
     @Query("SELECT * FROM notes WHERE ((title LIKE '%' || :title || '%' OR '%' || content LIKE '%' || :content || '%') AND archived = :archived)")
     abstract fun filterNotes(title: String, content: String, archived: Boolean): Observable<List<NoteEntity>>
+
+    @Query("DELETE FROM notes WHERE id = :id")
+    abstract fun deleteById(id: Long): Completable
+
+    @Query("UPDATE notes SET title = :title, content = :content, archived = :archived WHERE id = :existingId")
+    abstract fun update(existingId: Long, title: String, content: String, archived: Boolean): Completable
 
 }
