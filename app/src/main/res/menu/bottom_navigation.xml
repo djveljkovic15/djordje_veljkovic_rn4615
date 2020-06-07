@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/navigation_1"
-        android:icon="@drawable/ic_stanje"
+        android:icon="@drawable/ic_list"
         android:title="Raspored" />
 
     <item
         android:id="@+id/navigation_2"
-        android:icon="@drawable/ic_stanje"
+        android:icon="@drawable/ic_note"
         android:title="Beleske" />
 
     <item
         android:id="@+id/navigation_3"
-        android:icon="@drawable/ic_stanje"
+        android:icon="@drawable/ic_chart"
         android:title="Statistika" />
 
 </menu>

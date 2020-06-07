@@ -4,6 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.recycler_beleske.*
+import rs.raf.projekat2.djordje_veljkovic_rn4615.R
 import rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.note.Note
 
 class BeleskaViewHolder(override val containerView: View,
@@ -29,6 +30,14 @@ class BeleskaViewHolder(override val containerView: View,
     fun bind(beleska: Note) {
         recyclerBeleskeTitleTv.text = beleska.title
         recyclerBeleskeContentTv.text = beleska.content
+
+        if(beleska.archived){
+            recyclerBeleskeArchiveIv.setImageResource(R.drawable.ic_archive)
+        }else{
+            recyclerBeleskeArchiveIv.setImageResource(R.drawable.ic_unarchive)
+        }
+        recyclerBeleskeEditIv.setImageResource(R.drawable.ic_edit)
+        recyclerBeleskeDeleteIv.setImageResource(R.drawable.ic_delete)
 
     }
 

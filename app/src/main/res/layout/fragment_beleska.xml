@@ -48,9 +48,9 @@
 
     <at.markushi.ui.CircleButton
         android:id="@+id/fragmentBeleskeNewCb"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:src="@drawable/face"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:src="@drawable/ic_add_circle"
         app:cb_color="#99CC00"
         app:cb_pressedRingWidth="8dip"
         app:layout_constraintEnd_toEndOf="parent"
