@@ -51,7 +51,6 @@ class BeleskaFragment : Fragment(R.layout.fragment_beleska), CompoundButton.OnCh
         noteViewModel.saveTestNotes()
     }
 
-    // Nesto sam ovde upetljao, imam bug da dok ne switchujem prvi put nece dobro da filtrira novoarhivirane
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
         when(buttonView?.id){
             R.id.fragmentBeleskeSw -> {

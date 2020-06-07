@@ -1,6 +1,7 @@
 package rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.activities
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_note.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -61,8 +62,8 @@ class NoteActivity() : AppCompatActivity(R.layout.activity_note){
         }
     }
     private fun saveNote(){
+        activityNoteIzmeniBtn.text = "Sacuvaj"
         activityNoteIzmeniBtn.setOnClickListener {
-
             val title = activityNoteTitleEt.text.toString()
             val content = activityNoteContentEt.text.toString()
 
@@ -70,6 +71,9 @@ class NoteActivity() : AppCompatActivity(R.layout.activity_note){
                 val newNote = Note(666,"FixedUsername",title,content,false )
                 noteViewModel.save(newNote)
                 finish()
+            }else{
+                Toast.makeText(this, "Naslov ne sme biti prazan!", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }

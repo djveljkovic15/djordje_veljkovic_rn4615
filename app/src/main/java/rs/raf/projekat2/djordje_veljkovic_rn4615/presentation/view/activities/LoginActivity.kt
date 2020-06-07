@@ -27,63 +27,12 @@ class LoginActivity: AppCompatActivity(R.layout.activity_login) {
         var username : String = sharedPreferences.getString(MainActivity.USERNAME, "")?: ""
         var pin : String = sharedPreferences.getString(MainActivity.PIN, "")?: ""
 
-//
-//        if(username.length in 1..15) {
-//            val intent = Intent(this, MainActivity::class.java)
-//            intent.putExtra(MainActivity.USERNAME, username)
-//            intent.putExtra(MainActivity.USERNAME, pin)
-//            startActivity(intent)
-//            finish()
-//        }
-
-
-
         loginBtn.setOnClickListener(){
             username = usernameEt.text.toString()
             pin = pinEt.text.toString()
             Timber.e("WHAT?")
             Timber.e("ovo: "+username + pin)
             userViewModel.verifyUser(username, pin)
-
-//            userViewModel.logged.observe(this, Observer {
-//                when (it) {
-//                    is UserState.Logged -> {
-//                        val intent = Intent(this, MainActivity::class.java)
-//                        Timber.e("Logged iz login activity")
-//                        val editor = sharedPreferences.edit()
-//                        editor.putString(MainActivity.USERNAME, username)
-//                        editor.putString(MainActivity.PIN, pin)
-//                        editor.apply()
-//                        startActivity(intent)
-//                        finish()
-//                    }
-//                    is UserState.Error -> {
-//                        when {
-//                            pin.isEmpty() -> {
-//                                Toast.makeText(this, "Pin ne sme biti prazan!", Toast.LENGTH_SHORT)
-//                                    .show()
-//                            }
-//                            pin.length != 4 -> {
-//                                Toast.makeText(
-//                                    this,
-//                                    "Pin mora biti duzine od 4 cifre!",
-//                                    Toast.LENGTH_SHORT
-//                                ).show()
-//                            }
-//                            else -> {
-//                                Toast.makeText(this, "Pogresno uneti podaci!", Toast.LENGTH_SHORT)
-//                                    .show()
-//                            }
-//                        }
-//                        val intent = Intent(this, LoginActivity::class.java)
-//                        finish()
-//                        startActivity(intent)
-//                        //Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
-//                    }
-//
-//                }
-//            })
-
         }
 
         userViewModel.logged.observe(this, Observer {
@@ -121,10 +70,7 @@ class LoginActivity: AppCompatActivity(R.layout.activity_login) {
                     finish()
                     //Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 }
-
             }
         })
     }
-
-
 }
