@@ -1,5 +1,6 @@
 package rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
@@ -13,6 +14,8 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import rs.raf.projekat2.djordje_veljkovic_rn4615.R
 import rs.raf.projekat2.djordje_veljkovic_rn4615.data.models.note.Note
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.contract.NoteContract
+import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.activities.MainActivity
+import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.activities.NoteActivity
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.recycler.adapter.BeleskaAdapter
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.recycler.diff.BeleskaDiffCallback
 import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.states.NoteState
@@ -30,13 +33,13 @@ class BeleskaFragment : Fragment(R.layout.fragment_beleska), CompoundButton.OnCh
     }
 
     private fun init() {
-//        noteViewModel.findById(1)
-
-        initFilter()
-        initAddTestNotes()
         initRecycleView()
         initObservers()
+        initFilter()
 
+        onCheckedChanged(fragmentBeleskeSw,false)
+
+//        initAddTestNotes()        //Trenutno puni svaki put, idealno puni samo jednom ali je test tako da :shrug:
     }
 
     private fun initAddTestNotes() {
@@ -48,6 +51,7 @@ class BeleskaFragment : Fragment(R.layout.fragment_beleska), CompoundButton.OnCh
         noteViewModel.saveTestNotes()
     }
 
+    // Nesto sam ovde upetljao, imam bug da dok ne switchujem prvi put nece dobro da filtrira novoarhivirane
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
         when(buttonView?.id){
             R.id.fragmentBeleskeSw -> {
@@ -67,13 +71,13 @@ class BeleskaFragment : Fragment(R.layout.fragment_beleska), CompoundButton.OnCh
         fragmentBeleskeSw.setOnCheckedChangeListener(this)
 
         var filter = ""
-        var archive : Boolean
+//        var archive : Boolean
 
         fragmentBeleskeFilterEt.doAfterTextChanged {
             filter = fragmentBeleskeFilterEt.text.toString()
-            archive = false
+//            archive = false
 
-            noteViewModel.filterNote(filter, archive)
+            noteViewModel.filterNote(filter, fragmentBeleskeSw.isChecked)
         }
 
     }
@@ -105,20 +109,31 @@ class BeleskaFragment : Fragment(R.layout.fragment_beleska), CompoundButton.OnCh
     }
 
     private fun initRecycleView() {
+        initNewNote()
         fragmentBeleskeRW.layoutManager = LinearLayoutManager(activity)
         noteAdapter = BeleskaAdapter(BeleskaDiffCallback(),
             {
                 noteViewModel.deleteById(it.id)
 
             },{
-                //otvara novi prozor koji povlaci podatke\menja u bazi
-                //noteViewModel.save(it)
+                // Mogu i da stavim da prosledjujem samo ID, pa da u NoteActivity radim getNoteByID
+                val intent = Intent(context, NoteActivity::class.java)
+                intent.putExtra(MainActivity.MESSAGE_KEY, it)
+                startActivity(intent)
+
             },{ // Mogli smo da napravimo samo setArchived kao poziv ka bazi
                 val updatedNote = Note(it.id,it.userCreatorUsername,it.title,it.content,!it.archived)
                 noteViewModel.update(it.id, updatedNote)
             })
         fragmentBeleskeRW.adapter = noteAdapter
 
+    }
+
+    private fun initNewNote() {
+        fragmentBeleskeNewCb.setOnClickListener {
+            val intent = Intent(context, NoteActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 //

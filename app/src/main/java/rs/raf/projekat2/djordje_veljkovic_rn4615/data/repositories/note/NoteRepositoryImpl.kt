@@ -95,7 +95,8 @@ class NoteRepositoryImpl(
         val note1 = NoteEntity("Dzo","Title 1", "Ovo je neki content iz title1 gospodina... :) ", false)
         val note2 = NoteEntity("Dzo","Title 2", "Ovo je neki content iz title2 smaraca... :) ", false)
         val note3 = NoteEntity("Dzo","Title 3", "Ovo je neki content iz title3 ludaka... :) ", false)
+        val note4 = NoteEntity("Dzo","Dugacki Title", "Ovo je neki dugacki content Ovo je neki dugacki content Ovo je neki dugacki content Ovo je neki dugacki content Ovo je neki dugacki content Ovo je neki dugacki content Ovo je neki dugacki content Ovo je neki dugacki content Ovo je neki dugacki content Ovo je neki dugacki content Ovo je neki dugacki content Ovo je neki dugacki content Ovo je neki dugacki content  ", false)
 
-        return noteDao.saveAll(listOf(note1, note2, note3))
+        return noteDao.saveAll(listOf(note1, note2, note3, note4))
     }
 }

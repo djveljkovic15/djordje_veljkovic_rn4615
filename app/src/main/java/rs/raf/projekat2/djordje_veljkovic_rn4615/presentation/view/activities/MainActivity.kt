@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     companion object {
         const val USERNAME = "username"
         const val PIN = "pin"
+        const val MESSAGE_KEY = "666"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

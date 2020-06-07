@@ -18,6 +18,10 @@ class BeleskaViewHolder(override val containerView: View,
         recyclerBeleskeEditIv.setOnClickListener{
             onEditClicked.invoke(adapterPosition)
         }
+//        fragmentBeleskeNewCb.setOnClickListener{
+//            onEditClicked.invoke(adapterPosition)
+//        }
+
         recyclerBeleskeArchiveIv.setOnClickListener{
             onArhiveClicked.invoke(adapterPosition)
         }

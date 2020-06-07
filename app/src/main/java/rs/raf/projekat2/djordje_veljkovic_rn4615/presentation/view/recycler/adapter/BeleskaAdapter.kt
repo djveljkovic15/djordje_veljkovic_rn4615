@@ -10,18 +10,21 @@ import rs.raf.projekat2.djordje_veljkovic_rn4615.presentation.view.recycler.view
 
 class BeleskaAdapter(beleskaDiffCallback: BeleskaDiffCallback,
                      val onDeleteClicked: (Note)->Unit,
+//                     val onEditClicked: (Note?)->Unit,
                      val onEditClicked: (Note)->Unit,
                      val onArchiveClicked: (Note)->Unit
                      ) : ListAdapter<Note, BeleskaViewHolder>(beleskaDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeleskaViewHolder {
         //val layoutInflater = LayoutInflater.from(parent.context)
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_beleske, parent, false)
+//        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_beleske, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_beleske_cardview, parent, false)
         return BeleskaViewHolder(view,
             {
                 val note = getItem(it)
                 onDeleteClicked.invoke(note)
             },{
+//                val note = it?.let { it1 -> getItem(it1) }
                 val note = getItem(it)
                 onEditClicked.invoke(note)
             },{
